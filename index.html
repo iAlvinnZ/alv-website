@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio | Alvin Christian Gunawan</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        /* Mengatur Palet Warna menggunakan CSS Variables */
+        :root {
+            --base-color: #f2efef;      /* Latar belakang utama / Header */
+            --primary-color:#a7e198;   /* Highlight, Tombol, Card */
+            --secondary-color: #f2efef; /* Latar belakang section selang-seling */
+            --accent-color: #b7c686;    /* Efek hover, border, dekorasi */
+            
+            --text-dark: #000000;       /* Warna teks utama agar kontras dengan background pastel */
+            --text-light: #ffffff   ;      /* Warna teks untuk background gelap/hover */
+        
+        }
+
+        /* Pengaturan Dasar */
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--base-color);
+        }
+
+        /* Utility Classes untuk Latar Belakang Section */
+        .bg-base { background-color: var(--base-color); }
+        .bg-secondary-custom { background-color: var(--secondary-color); }
+
+        /* Jarak (Padding) untuk tiap Section & Scroll Margin untuk Navbar Sticky */
+        section {
+            padding: 100px 0;
+            scroll-margin-top: 70px;
+        }
+
+        /* --- 1. Navbar Styling --- */
+        .navbar-custom {
+            background-color: var(--base-color);
+            box-shadow: 0 4px 6px rgba(174, 184, 119, 0.4);
+            border-bottom: 2px solid var(--accent-color);
+        }
+        .navbar-custom .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+        }
+        .navbar-custom .nav-link {
+            font-weight: 500;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+        .navbar-custom .nav-link:hover, 
+        .navbar-custom .nav-link.active {
+            color: var(--text-light);
+            background-color: var(--accent-color);
+            border-radius: 5px;
+        }
+
+        /* --- 2. Button Styling --- */
+        .btn-custom {
+            background-color: var(--primary-color);
+            color: var(--text-dark);
+            font-weight: 600;
+            border: 2px solid var(--accent-color);
+            padding: 12px 30px;
+            border-radius: 50px;
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-custom:hover {
+            background-color: var(--accent-color);
+            color: var(--text-light);
+            border-color: var(--text-light);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(174, 184, 119, 0.5);
+        }
+
+        /* --- 3. Home / Hero Section --- */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+        }
+        .highlight-text {
+            background-color: var(--primary-color);
+            padding: 0 10px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        .hero-image {
+            border-radius: 30px;
+            box-shadow: 0 15px 25px rgba(174, 184, 119, 0.4);
+            border: 5px solid var(--accent-color);
+            max-width: 80%;
+        }
+
+        /* --- 4. Skills Section --- */
+        .progress {
+            height: 25px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border: 1px solid var(--accent-color);
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+        }
+        .progress-bar {
+            background-color: var(--accent-color);
+            font-weight: 600;
+            color: var(--text-light);
+            line-height: 25px;
+        }
+        .badge-custom {
+            background-color: var(--primary-color);
+            color: var(--text-dark);
+            border: 1px solid var(--accent-color);
+            font-size: 1rem;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        
+        /* Custom styling untuk skill berbentuk lingkaran (Sesuai Gambar) */
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .skill-circle {
+            width: 100px;
+            height: 100px;
+            background-color: #212529; /* Warna gelap menyesuaikan referensi gambar */
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .skill-circle:hover {
+            transform: translateY(-5px);
+            border-color: var(--text-dark);
+            box-shadow: 0 15px 25px rgba(174, 184, 119, 0.4);
+        }
+        .skill-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+        .skill-title {
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        /* --- 5. Portfolio Cards --- */
+        .card-custom {
+            background-color: var(--primary-color);
+            border: 2px solid var(--accent-color);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .card-custom:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(174, 184, 119, 0.4);
+            border-color: var(--text-dark);
+        }
+        .card-img-placeholder {
+            height: 200px;
+            background-color: var(--base-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            font-weight: 600;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        /* --- 6. Contact Section --- */
+        .contact-card {
+            background-color: var(--primary-color);
+            border: 2px solid var(--accent-color);
+            border-radius: 15px;
+            padding: 30px;
+            transition: transform 0.3s ease;
+        }
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(174, 184, 119, 0.4);
+            border-color: var(--text-dark);
+        }
+        .contact-link {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .contact-link:hover {
+            color: var(--accent-color);
+        }
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--accent-color);
+            color: var(--text-light);
+            padding: 20px 0;
+        }
+
+        /* --- Tombol Hero Pill (Sesuai Gambar Referensi) --- */
+        .btn-hero-pill {
+            background-color: var(--primary-color);
+            color: var(--text-dark);
+            border: 2px solid var(--accent-color);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(174, 184, 119, 0.4);
+        }
+        .btn-hero-pill:hover {
+            background-color: var(--primary-color);
+            color: var(--text-dark);
+            border-color: var(--text-dark);
+            transform: translateY(-3px);
+        }
+
+        /* --- Efek Hover Social Media (TAMBAHAN BARU) --- */
+        #social-media a .rounded-4 {
+            transition: all 0.3s ease !important; /* Memastikan transisi mulus */
+        }
+        #social-media a:hover .rounded-4 {
+            transform: translateY(-10px) !important; /* Terangkat ke atas */
+            box-shadow: 0 15px 25px rgba(174, 184, 119, 0.4) !important; /* Memberikan bayangan */
+            border-color: var(--text-dark) !important; /* Warna garis pinggir menjadi gelap */
+        }
+
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbarNav">
+
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">Alv.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav gap-2">
+                    <li class="nav-item"><a class="nav-link px-3" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#portfolio">Portofolio</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#social-media">Social Media</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" style="background-color: var(--base-color); min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; padding: 0; overflow: hidden;">
+        <div class="container position-relative" style="z-index: 2;">
+            <div class="row align-items-center">
+                
+                <div class="col-12 col-md-8 position-relative" style="z-index: 3;">
+                    <h1 style="font-family: 'Times New Roman', Times, serif; font-size: clamp(4.5rem, 11vw, 10rem); color: #000; font-weight: 400; line-height: 0.85; margin: 0; letter-spacing: -2px;">
+                        Alvin<br>
+                        <span style="display: inline-block; padding-left: 15%;">Christian</span>
+                    </h1>
+                    
+                    <div class="mt-4" style="padding-left: 15%;">
+                        <div class="d-flex flex-wrap gap-3">
+                            <a href="#skills" class="btn-hero-pill">
+                                <i class="bi bi-arrow-down-circle me-2"></i> See More
+                            </a>
+                            <a href="#contact" class="btn-hero-pill">
+                                <i class="bi bi-envelope-at me-2"></i> Contact Me
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-12 col-md-4 position-absolute end-0 top-50 translate-middle-y d-none d-md-block" style="z-index: 1; height: 500px;">
+                    <div style="width: 100%; max-width: 340px; height: 480px; background-color: var(--accent-color); transform: rotate(5deg); position: absolute; right: 5%; top: 0;">
+                        <div style="width: 100%; height: 100%; background-image: url('profile.jpeg'); background-size: cover; background-position: center; transform: translate(15px, 15px);"></div>
+                    </div>
+                </div>
+
+                <div class="col-12 d-block d-md-none mt-5 position-relative" style="z-index: 1; display: flex; justify-content: center;">
+                     <div style="width: 80%; height: 400px; background-color: var(--accent-color); transform: rotate(3deg);">
+                        <div style="width: 100%; height: 100%; background-image: url('profile.jpeg'); background-size: cover; background-position: center; transform: translate(12px, 12px);"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="bg-base">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col">
+                    <h2 class="fw-bold">My Skills</h2>
+                    <div class="mx-auto mt-2" style="width: 80px; height: 4px; background-color: var(--accent-color); border-radius: 2px;"></div>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center mt-4">
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="skill-item">
+                        <div class="skill-circle" style="background-color: var(--primary-color);">
+                            <i class="bi bi-filetype-html skill-icon" style="color : var(--text-dark)"></i>
+                        </div>
+                        <div class="skill-title">HTML</div>
+                    </div>
+                </div>
+                
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="skill-item">
+                        <div class="skill-circle" style="background-color: var(--primary-color);">
+                            <i class="bi bi-filetype-py skill-icon" style="color : var(--text-dark)"></i>
+                        </div>
+                        <div class="skill-title">Python</div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="skill-item">
+                        <div class="skill-circle" style="background-color: var(--primary-color);">
+                            <i class="bi bi-cup-hot skill-icon" style="color : var(--text-dark)"></i> </div>
+                        <div class="skill-title">Java</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card card-custom shadow-sm">
+                        <div class="card-img-placeholder">
+                            <i class="bi bi-image fs-1 opacity-50"></i>
+                        </div>
+                        <div class="card-body text-center p-4">
+                            <h5 class="card-title fw-bold">Basketball Athlete</h5>
+                            <p class="card-text small mb-4">Membangun tampilan antarmuka responsif untuk toko online menggunakan HTML, CSS, dan Bootstrap.</p>
+                            <a href="#" class="btn btn-outline-dark btn-sm rounded-pill px-4" style="border-color: var(--accent-color);">Lihat Detail</a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="bg-secondary-custom">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col">
+                    <h2 class="fw-bold">Portofolio Saya</h2>
+                    <div class="mx-auto mt-2" style="width: 80px; height: 4px; background-color: var(--accent-color); border-radius: 2px;"></div>
+                    <p class="mt-3">Beberapa proyek yang telah saya kerjakan.</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card card-custom shadow-sm">
+                        <div class="card-img-placeholder">
+                            <i class="bi bi-image fs-1 opacity-50"></i>
+                        </div>
+                        <div class="card-body text-center p-4">
+                            <h5 class="card-title fw-bold">Badan Eksekutif Mahasiswa Universitas</h5>
+                            <p class="card-text small mb-4">Membangun tampilan antarmuka responsif untuk toko online menggunakan HTML, CSS, dan Bootstrap.</p>
+                            <a href="#" class="btn btn-outline-dark btn-sm rounded-pill px-4" style="border-color: var(--accent-color);">Lihat Detail</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card card-custom shadow-sm">
+                        <div class="card-img-placeholder">
+                            <i class="bi bi-laptop fs-1 opacity-50"></i>
+                        </div>
+                        <div class="card-body text-center p-4">
+                            <h5 class="card-title fw-bold">Aplikasi Manajemen Tugas</h5>
+                            <p class="card-text small mb-4">Desain UI/UX dan implementasi front-end untuk aplikasi produktivitas mahasiswa.</p>
+                            <a href="#" class="btn btn-outline-dark btn-sm rounded-pill px-4" style="border-color: var(--accent-color);">Lihat Detail</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card card-custom shadow-sm">
+                        <div class="card-img-placeholder">
+                            <i class="bi bi-phone fs-1 opacity-50"></i>
+                        </div>
+                        <div class="card-body text-center p-4">
+                            <h5 class="card-title fw-bold">Landing Page Acara Kampus</h5>
+                            <p class="card-text small mb-4">Membuat halaman promosi interaktif (Single Page Application) untuk acara himpunan mahasiswa.</p>
+                            <a href="#" class="btn btn-outline-dark btn-sm rounded-pill px-4" style="border-color: var(--accent-color);">Lihat Detail</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="social-media" class="bg-secondary-custom">
+    <div class="container">
+        <div class="row text-center mb-4">
+            <div class="col">
+                <h2 class="fw-bold">Social Media</h2>
+                <div class="mx-auto mt-2" style="width: 80px; height: 4px; background-color: var(--accent-color); border-radius: 2px;"></div>
+                <p class="mt-3">Mari terhubung dan ikuti kegiatan saya di platform media sosial berikut</p>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center g-3">
+            <div class="col-6 col-md-4 col-lg-3">
+                <a href="https://www.instagram.com/alvinchr._/" target="_blank" class="text-decoration-none">
+                    <div class="p-4 rounded-4 shadow-sm text-center h-100" style="background-color: var(--primary-color); border: 1px solid var(--accent-color); transition: transform 0.3s ease;">
+                        <i class="bi bi-instagram fs-1 d-block mb-2" style="color: var(--text-dark);"></i>
+                        <strong style="color: var(--text-dark);">Instagram</strong>
+                        <div class="small text-muted">@alvinchr._</div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                <a href="https://www.tiktok.com/@alvinchr._" target="_blank" class="text-decoration-none">
+                    <div class="p-4 rounded-4 shadow-sm text-center h-100" style="background-color: var(--primary-color); border: 1px solid var(--accent-color); transition: transform 0.3s ease;">
+                        <i class="bi bi-tiktok fs-1 d-block mb-2" style="color: var(--text-dark);"></i>
+                        <strong style="color: var(--text-dark);">TikTok</strong>
+                        <div class="small text-muted">@alvinchr._</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <section id="contact" style="background-color: var(--base-color); padding: 100px 0;">
+        <style>
+            /* CSS khusus untuk ikon lingkaran putih */
+            .contact-icon-circle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 45px;
+                height: 45px;
+                background-color: var(--primary-color);
+                color: #000000;
+                border-radius: 50%;
+                font-size: 1.3rem;
+                text-decoration: none;
+                transition: all 0.3s ease;
+            }
+            .contact-icon-circle:hover {
+                transform: translateY(-5px);
+                background-color: var(--primary-color); /* Berubah hijau saat disentuh */
+                color: var(--text-dark);
+                box-shadow: 0 5px 15px rgba(174, 184, 119, 0.4);
+            }
+        </style>
+        
+        <div class="container text-center">
+            <h2 class="fw-bold">Contact</h2>
+            <div class="mx-auto mt-2" style="width: 80px; height: 4px; background-color: var(--accent-color); border-radius: 2px;"></div>
+                <p class="mt-3">Let's Collaborate</p>
+            <br>
+            <div class="d-flex justify-content-center gap-4">
+                <a href="mailto:alvinchristiansekolah@gmail.com" class="contact-icon-circle" title="Email">
+                    <i class="bi bi-envelope-fill"></i>
+                </a>
+                <a href="https://wa.me/+6282336904096" target="_blank" class="contact-icon-circle" title="WhatsApp">
+                    <i class="bi bi-telephone"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/alvin-christian-90697a20a/" target="_blank" class="contact-icon-circle" title="LinkedIn">
+                    <i class="bi bi-linkedin"></i>
+                </a>
+                <a href="https://github.com/iAlvinnZ" target="_blank" class="contact-icon-circle" title="GitHub Profile">
+                    <i class="bi bi-github"></i>
+                </a>
+                <a href="https://machung.ac.id/" target="_blank" class="contact-icon-circle" title="Universitas Ma Chung">
+                    <i class="bi bi-building"></i>
+                </a>
+                <a href="https://lockey-irawan.github.io/" target="_blank" class="contact-icon-circle" title="Project Manager">
+                    <i class="bi bi-person-workspace"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center">
+        <div class="container">
+            <p class="mb-0 fw-medium">
+                &copy; 2026 Alvin Christian Gunawan.
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
